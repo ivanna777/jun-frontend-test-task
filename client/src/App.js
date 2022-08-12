@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import {Component} from 'react';
+import StatusTable from './Component/Table/Table'
+import { fetchDistance } from './redux/operations';
+import { connect } from 'react-redux';
 import './App.css';
 
-function App() {
+class App extends Component {
+
+  componentDidMount(){
+    this.props.onFetchDistance()
+  }
+
+  render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React.
-        </a>
-      </header>
+      <h1>Horse Betting Status</h1>
+      <StatusTable />
     </div>
-  );
+  )};
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  onFetchDistance: () => dispatch(fetchDistance())
+})
+
+export default connect(0, mapDispatchToProps)(App);
